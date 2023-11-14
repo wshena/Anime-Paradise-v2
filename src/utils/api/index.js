@@ -10,18 +10,18 @@ export const AnimeThisSeason = async () => {
   }
 }
 
-export const GetTopAnime = async (limit) => {
+export const GetTopAnime = async () => {
   try {
-    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/anime?limit=${limit}`);
+    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/anime`);
     return respones.data
   } catch (error) {
     console.log(error)
   }
 }
 
-export const GetTopManga = async (limit) => {
+export const GetTopManga = async () => {
   try {
-    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/manga?limit=${limit}`);
+    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/manga`);
     return respones.data
   } catch (error) {
     console.log(error)
