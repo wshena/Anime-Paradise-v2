@@ -21,3 +21,7 @@ img {
 .container {
   @apply max-w-[1400px] mx-auto
 }
+
+.container__padding {
+  @apply py-[20px] md:py-[50px] px-[20px] md:px-[50px] lg:px-[80px]
+}
