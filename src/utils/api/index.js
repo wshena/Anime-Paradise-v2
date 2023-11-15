@@ -27,3 +27,21 @@ export const GetTopManga = async () => {
     console.log(error)
   }
 }
+
+export const GetSeasonList = async () => {
+  try {
+    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/seasons`);
+    return respones.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const GetAnimeSeason = async (year, season, page) => {
+  try {
+    const respones = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/seasons/${year}/${season}?page=${page}`);
+    return respones.data
+  } catch (error) {
+    console.log(error);
+  }
+}

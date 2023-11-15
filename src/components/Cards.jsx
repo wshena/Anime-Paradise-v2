@@ -44,7 +44,7 @@ export const BigCards = ({data}) => {
 			<div className="w-[200px] h-[300px]">
 				<img src={data.images.jpg.image_url} alt={data.title} />
 			</div>
-			<h1 className="mt-[8px] font-bold text-[0.9rem]">{data.title}</h1>
+			<h1 className="truncate mt-[8px] font-bold text-[0.9rem]">{data.title}</h1>
 
 			{
 				isHovered && (
@@ -53,7 +53,8 @@ export const BigCards = ({data}) => {
 					}}>
 						<div className="w-full h-full bg-black bg-opacity-80 p-[15px]">
 							<div className="mb-[10px]">
-								<h1 className="font-bold">{data.title}</h1>
+								{/* <TruncatedHeading text={data.title} /> */}
+								<h1 className="font-bold truncate">{data.title}</h1>
 								<div className="flex items-center gap-[8px]">
 									<p>{data.score}</p>
 									<AiFillStar />
