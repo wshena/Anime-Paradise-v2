@@ -7,6 +7,7 @@ import { AnimeTrailerSection } from '../components/AnimeTrailerSection';
 import AnimeThisSeasonCarousel from '../components/AnimeThisSeasonCarousel';
 import TopAnimeCarousel from '../components/TopAnimeCarousel';
 import TopMangaCarousel from '../components/TopMangaCarousel';
+import Loading from '../components/Loading';
 
 const Home = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ const Home = () => {
 		const apiData = await AnimeThisSeason();
 
 		if (apiData) {
-			setJumbotronAnime(getRandomItems(apiData.data.slice(), 3));
+			setJumbotronAnime(getRandomItems(apiData.data.slice(), 5));
 			setThisAnimeSeason(apiData.data);
 			setIsLoading(false);
 		}
@@ -29,9 +30,7 @@ const Home = () => {
 
 	if (isLoading) {
 		return (
-			<div className="w-full h-[100vh] flex items-center justify-center">
-				<div className="border-gray-300 h-20 w-20 animate-spin rounded-full border-8 border-t-orange-600" />
-			</div>
+			<Loading />
 		)
 	}
 

@@ -15,7 +15,7 @@ const TopAnimeCarousel = () => {
 		fecthData();
 	}, [])
   return (
-    <HomeCarousel data={topAnime} headline1={'Watch the top animes!'} headline2={'browse and discover top anime recommendations recommended by other users'}/>
+    <HomeCarousel navigation={'/anime/top'} data={topAnime} headline1={'Watch the top animes!'} headline2={'browse and discover top anime recommendations recommended by other users'}/>
   )
 }
 

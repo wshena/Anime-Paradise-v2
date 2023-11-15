@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import { BigCarousel } from "./Carousel"
 
 const HomeCarousel = ( props ) => {
-	const { headline1, headline2, data } = props;
+	const { headline1, headline2, data, navigation } = props;
 	
   return (
     <div className="container container__padding">
@@ -11,7 +12,7 @@ const HomeCarousel = ( props ) => {
 					<h1 className='font-bold text-[1.4rem] md:text-[1.9rem]'>{headline1}</h1>
 					<h3 className='text-[1rem] md:text-[1.2rem] text-gray-500'>{headline2}</h3>
 				</div>
-				<a href="#">See more</a>
+				<Link to={navigation}>See more</Link>
 			</div>
 			<BigCarousel data={data}/>
 		</div>

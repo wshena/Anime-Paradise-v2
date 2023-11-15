@@ -1,14 +1,21 @@
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
-
-const queryClient = new QueryClient();
+import TopAnime from './pages/anime/TopAnime';
+import TopManga from './pages/manga/TopManga';
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      {/* Komponen-komponen di dalamnya */}
-      <Home />
-    </QueryClientProvider>
+    <Router>
+      <Routes>
+        <Route path='/' Component={Home}/>
+      </Routes>
+      <Routes>
+        <Route path='/anime/top' Component={TopAnime} />
+      </Routes>
+      <Routes>
+        <Route path='/manga/top' Component={TopManga} />
+      </Routes>
+    </Router>    
   );
 }
 

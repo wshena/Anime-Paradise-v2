@@ -15,7 +15,7 @@ const TopMangaCarousel = () => {
 		fecthData();
 	}, [])
   return (
-    <HomeCarousel data={topManga} headline1={'Read the top manga!'} headline2={'browse and discover top manga recommendations recommended by other users'}/>
+    <HomeCarousel navigation={'/manga/top'} data={topManga} headline1={'Read the top manga!'} headline2={'browse and discover top manga recommendations recommended by other users'}/>
   )
 }
 
