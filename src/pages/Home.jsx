@@ -7,7 +7,7 @@ import { AnimeTrailerSection } from '../components/AnimeTrailerSection';
 import AnimeThisSeasonCarousel from '../components/AnimeThisSeasonCarousel';
 import TopAnimeCarousel from '../components/TopAnimeCarousel';
 import TopMangaCarousel from '../components/TopMangaCarousel';
-import Loading from '../components/Loading';
+import { FullLoading } from '../components/Loading';
 
 const Home = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +30,7 @@ const Home = () => {
 
 	if (isLoading) {
 		return (
-			<Loading />
+			<FullLoading />
 		)
 	}
 

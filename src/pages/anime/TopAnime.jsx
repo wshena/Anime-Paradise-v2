@@ -5,7 +5,7 @@ import { JumbotronCarousel } from "../../components/Carousel";
 import axios from "axios";
 import { BigCards } from "../../components/Cards";
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
-import Loading from "../../components/Loading";
+import { CustomHeightLoading, FullLoading } from "../../components/Loading";
 
 const TopAnime = () => {
   const [topAnime, setTopAnime] = useState([]);
@@ -13,24 +13,51 @@ const TopAnime = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isPageChanging, setIsPageChanging] = useState(false);
 
   const fetchData = async (page) => {
-    const apiData = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/anime?page=${page}`);
-    const animeData = apiData.data.data
-    const pagination = apiData.data.pagination
+    setIsPageChanging(true); // Menetapkan isLoading menjadi true ketika mulai mengambil data baru
+    try {
+      const apiData = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/anime?page=${page}`);
+      const animeData = apiData.data.data
+      const pagination = apiData.data.pagination
 
-    if (apiData) {
-      setTopAnime(animeData);
-      setJumbotronAnime(getRandomItems(animeData.slice(), 5));
+      if (apiData) {
+        setTopAnime(animeData);
+        setJumbotronAnime(getRandomItems(animeData.slice(), 5));
+        setHasNextPage(pagination.has_next_page);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
       setIsLoading(false);
+      setIsPageChanging(false);
     }
-
-    (pagination.has_next_page) ? setHasNextPage(true) : setHasNextPage(false);
   }
+
+  // const fetchData = async (page) => {
+  //   const apiData = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/top/anime?page=${page}`);
+  //   const animeData = apiData.data.data
+  //   const pagination = apiData.data.pagination
+
+  //   if (apiData) {
+  //     setTopAnime(animeData);
+  //     setJumbotronAnime(getRandomItems(animeData.slice(), 5));
+  //     setIsLoading(false);
+  //   }
+
+  //   (pagination.has_next_page) ? setHasNextPage(true) : setHasNextPage(false);
+  // }
 
   useEffect(() => {
     fetchData(currentPage);
   },[currentPage])
+
+  if (isLoading) {
+    return (
+      <FullLoading />
+    )
+  }
 
   return (
     <Layout>
@@ -38,8 +65,8 @@ const TopAnime = () => {
       <div className="container container__padding">
         <h1 className="text-[2rem] mb-[20px]">Top Anime</h1>
         {
-          isLoading && (
-            <Loading />
+          isPageChanging && (
+            <CustomHeightLoading />
           )
         }
         <div className="flex items-center flex-col md:grid md:grid-cols-3 lg:grid-cols-5 gap-[20px]">
