@@ -7,7 +7,7 @@ import { BigCards } from "../../components/Cards";
 import { CustomHeightLoading, FullLoading } from "../../components/Loading";
 
 const Dropdown = ({ data, setActiveTab }) => {
-	const [selectedOption, setSelectedOption] = useState({ year: 2023, season: 'fall' });
+	const [selectedOption, setSelectedOption] = useState({ year: 2023, season: 'winter' });
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 

@@ -16,7 +16,7 @@ const AnimeThisSeasonCarousel = () => {
 	}, [])
 
   return (
-    <HomeCarousel data={animeThisSeason} headline1={'Anime this seasons!'} headline2={'Find the best new and continuing this anime seasons here!'}/>
+    <HomeCarousel navigation={'/anime/season'} data={animeThisSeason} headline1={'Anime this seasons!'} headline2={'Find the best new and continuing this anime seasons here!'}/>
   )
 }
 
