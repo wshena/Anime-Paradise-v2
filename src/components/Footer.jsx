@@ -7,12 +7,12 @@ const Footer = () => {
         footerData.map((footer) => {
           return (
             <div className="flex-col gap-[10px]" key={footer.title}>
-              <h1 className="font-bold">{footer.title}</h1>
+              <h1 className="mb-[10px] font-bold">{footer.title}</h1>
               <div className="flex flex-col gap-[8px]">
                 {
                   footer.content.map((content) => {
                     return (
-                      <a href="#" key={content}>{content}</a>
+                      <a href="#" className="hover:underline" key={content}>{content}</a>
                     )
                   })
                 }

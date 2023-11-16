@@ -45,3 +45,21 @@ export const GetAnimeSeason = async (year, season, page) => {
     console.log(error);
   }
 }
+
+export const GetAnimeSearch = async (title, page) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/anime?q=${title}&page=${page}`);
+    return respone.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const GetMangaSearch = async (title, page) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/manga?q=${title}&page=${page}`);
+    return respone.data
+  } catch (error) {
+    console.log(error)
+  }
+}
