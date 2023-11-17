@@ -1,5 +1,7 @@
+
+/* eslint-disable react/prop-types */
 export function sliceParagraph(text, targetWords) {
-    const words = text.split(' ');
+    const words = text?.split(' ');
     const slicedWords = words.slice(0, Math.min(targetWords, words.length));
     const slicedText = slicedWords.join(' ');
   

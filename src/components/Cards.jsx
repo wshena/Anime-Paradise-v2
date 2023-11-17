@@ -3,6 +3,7 @@
 import { useState } from "react";
 import {AiFillStar} from 'react-icons/ai'
 import { sliceParagraph } from "../utils/functions";
+import { Link } from "react-router-dom";
 
 export const JumbotronCards = ({title, synopsis, image}) => {
   return (
@@ -40,31 +41,46 @@ export const BigCards = ({data}) => {
 		setIsHovered(false)
 	}
 	return (
-		<div className="w-[200px] relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseExit}>
-			<div className="w-[200px] h-[300px]">
-				<img src={data.images.jpg.image_url} alt={data.title} />
-			</div>
-			<h1 className="truncate mt-[8px] font-bold text-[0.9rem]">{data.title}</h1>
+		<Link to={`/${data.title}/${data.mal_id}`}>
+			<div className="w-[200px] relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseExit}>
+				<div className="w-[200px] h-[300px]">
+					<img src={data.images.jpg.image_url} alt={data.title} />
+				</div>
+				<h1 className="truncate mt-[8px] font-bold text-[0.9rem]">{data.title}</h1>
 
-			{
-				isHovered && (
-					<div className="absolute top-0 left-0 w-full h-full text-white bg-center bg-cover" style={{
-						backgroundImage : `url(${data.images.jpg.image_url})`,
-					}}>
-						<div className="w-full h-full bg-black bg-opacity-80 p-[15px]">
-							<div className="mb-[10px]">
-								{/* <TruncatedHeading text={data.title} /> */}
-								<h1 className="font-bold truncate">{data.title}</h1>
-								<div className="flex items-center gap-[8px]">
-									<p>{data.score}</p>
-									<AiFillStar />
+				{
+					isHovered && (
+						<div className="absolute top-0 left-0 w-full h-full text-white bg-center bg-cover" style={{
+							backgroundImage : `url(${data.images.jpg.image_url})`,
+						}}>
+							<div className="w-full h-full bg-black bg-opacity-80 p-[15px]">
+								<div className="mb-[10px]">
+									{/* <TruncatedHeading text={data.title} /> */}
+									<h1 className="font-bold truncate">{data.title}</h1>
+									<div className="flex items-center gap-[8px]">
+										<p>{data.score}</p>
+										<AiFillStar />
+									</div>
 								</div>
+								<p className="line-clamp-6 text-[.8rem]">{data.synopsis}</p>
 							</div>
-							<p className="line-clamp-6 text-[.8rem]">{data.synopsis}</p>
 						</div>
-					</div>
-				)
-			}
-		</div>
+					)
+				}
+			</div>
+		</Link>
+	)
+}
+
+export const MoreLikeThisCard = ({data}) => {
+	return (
+		<Link to={`/${data.entry.title}/${data.entry.mal_id}`} target="blank">
+			<div className="w-[200px] relative">
+				<div className="w-[200px] h-[300px]">
+					<img src={data.entry.images.jpg.image_url} alt={data.entry.title} />
+				</div>
+				<h1 className="truncate mt-[8px] font-bold text-[0.9rem]">{data.entry.title}</h1>
+			</div>
+		</Link>
 	)
 }

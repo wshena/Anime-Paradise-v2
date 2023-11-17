@@ -4,6 +4,7 @@ import TopAnime from './pages/anime/TopAnime';
 import TopManga from './pages/manga/TopManga';
 import AnimeSeasonList from './pages/anime/AnimeSeasonList';
 import Search from './pages/Search';
+import Details from './pages/Details';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/anime/season' element={<AnimeSeasonList />} />
         <Route path='/manga/top' element={<TopManga />} />
         <Route path='/search/:title' element={<Search />} />
+        <Route path='/:title/:id' element={<Details />} />
       </Routes>
     </Router>        
   );

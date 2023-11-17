@@ -58,7 +58,43 @@ export const GetAnimeSearch = async (title, page) => {
 export const GetMangaSearch = async (title, page) => {
   try {
     const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/manga?q=${title}&page=${page}`);
-    return respone.data
+    return respone.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const GetAnimeFullById = async (id) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/anime/${id}/full`);
+    return respone.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const GetMangaFullById = async (id) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/manga/${id}/full`);
+    return respone.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const GetAnimeMoreLikeThis = async (id) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/anime/${id}/recommendations`);
+    return respone.data.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const GetMangaMoreLikeThis = async (id) => {
+  try {
+    const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/manga/${id}/recommendations`);
+    return respone.data.data
   } catch (error) {
     console.log(error)
   }
