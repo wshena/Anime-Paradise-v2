@@ -15,7 +15,7 @@ function App() {
         <Route path='/anime/season' element={<AnimeSeasonList />} />
         <Route path='/manga/top' element={<TopManga />} />
         <Route path='/search/:title' element={<Search />} />
-        <Route path='/:title/:id' element={<Details />} />
+        <Route path='/:title/:id/:type' element={<Details />} />
       </Routes>
     </Router>        
   );

@@ -2,10 +2,10 @@
 /* eslint-disable react/prop-types */
 export function sliceParagraph(text, targetWords) {
     const words = text?.split(' ');
-    const slicedWords = words.slice(0, Math.min(targetWords, words.length));
-    const slicedText = slicedWords.join(' ');
+    const slicedWords = words?.slice(0, Math.min(targetWords, words?.length));
+    const slicedText = slicedWords?.join(' ');
   
-    if (words.length > targetWords) {
+    if (words?.length > targetWords) {
       return `${slicedText}...`;
     }
     return slicedText;

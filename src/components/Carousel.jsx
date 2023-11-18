@@ -39,7 +39,7 @@ export const JumbotronCarousel = ({data}) => {
 					{
 						data.map((item) => {
 							return (
-								<JumbotronCards key={item.mal_id} title={item.title} image={item.images.jpg.image_url} synopsis={item.synopsis} />
+								<JumbotronCards key={item.mal_id} data={item} />
 							)
 						})
 					}

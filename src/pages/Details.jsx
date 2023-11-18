@@ -37,35 +37,37 @@ const ShowMore = ({ text, maxChar }) => {
 };
 
 const Details = () => {
-  const {title, id} = useParams();
+  const { title, id, type } = useParams();
   const [detail, setDetail] = useState({});
-  const [moreLikeThis, setMoreLikeThis] = useState([])
+  const [moreLikeThis, setMoreLikeThis] = useState([]);
 
-  const fetchDetail = async (id) => {
+  const fetchDetail = async (id, type) => {
     try {
-      if (detail.type === 'Manga') {
+      if (type === 'Manga') {
         const mangaDetail = await GetMangaFullById(id);
         const mangaMoreLikeThis = await GetMangaMoreLikeThis(id);
 
         setDetail(mangaDetail);
-        setMoreLikeThis(mangaMoreLikeThis)
+        setMoreLikeThis(mangaMoreLikeThis);
       } else {
         const animeDetail = await GetAnimeFullById(id);
         const animeMoreLikeThis = await GetAnimeMoreLikeThis(id);
 
         setDetail(animeDetail);
-        setMoreLikeThis(animeMoreLikeThis)
+        setMoreLikeThis(animeMoreLikeThis);
       }
     } catch (error) {
       console.error(error);
     }
   };
-  
-  useEffect(() => {
-    fetchDetail(id);
-  }, [detail.type])
 
-  console.log(moreLikeThis)
+  useEffect(() => {
+    if (type) {
+      fetchDetail(id, type);
+    }
+  }, [id, type]);
+
+  console.log(detail)
 
   return (
     <Layout>
@@ -98,12 +100,16 @@ const Details = () => {
               }
             </div>
             {
-              detail.type !== 'Manga' ? (
+              detail.type !== 'Manga' && (
                 <div className="flex justify-between gap-3 pb-3 border-black border-b">
                   <h3>Studios:</h3>
                   <h3>{detail?.studios?.map(studio => studio.name).join(', ')}</h3>
                 </div>
-              ) : (
+              )
+            }
+
+            {
+              detail.type === 'Manga' && (
                 <div className="flex justify-between gap-3 pb-3 border-black border-b">
                   <h3>Author:</h3>
                   <h3>{detail?.authors?.map(author => author.name).join(', ')}</h3>
@@ -112,12 +118,16 @@ const Details = () => {
             }
 
             {
-              detail.type !== 'Manga' ? (
+              detail.type !== 'Manga' && (
                 <div className="mt-[10px] flex justify-between gap-3 pb-3 border-black border-b">
                   <h3>Producers:</h3>
                   <h3>{detail?.producers?.map(producer => producer.name).join(', ')}</h3>
                 </div>
-              ) : (
+              )
+            }
+
+            {
+              detail.type === 'Manga' && (
                 <div className="mt-[10px] flex justify-between gap-3 pb-3 border-black border-b">
                   <h3>Serializations:</h3>
                   <h3>{detail?.serializations?.map(serialization => serialization.name).join(', ')}</h3>
@@ -142,12 +152,18 @@ const Details = () => {
           }
         </div>
         
-        <div className="mt-[50px]">
-          <div className="">
-            <h1 className="font-bold text-[1.9rem] mb-[20px]">More Like This</h1>
-            <MoreLikeThisCarousel data={moreLikeThis} />
-          </div>
-        </div>
+        {
+          moreLikeThis.length > 0 ? (
+            <div className="mt-[50px]">
+              <div className="">
+                <h1 className="font-bold text-[1.9rem] mb-[20px]">More Like This</h1>
+                <MoreLikeThisCarousel data={moreLikeThis} />
+              </div>
+            </div>
+          ) : (
+            ''
+          )
+        }
       </div>
     </Layout>
   )
