@@ -1,16 +1,30 @@
 export const NavbarNavigation = [
     {
         link: 'Anime',
-        to: '/anime'
+        dropdown: [
+          {
+            link: 'Top Anime',
+            to: '/anime/top'
+          }, 
+          {
+            link: 'Anime Season',
+            to: '/anime/season'
+          }
+        ]
     },
     {
         link: 'Manga',
-        to: '/manga'
+        dropdown: [
+          {
+            link: 'Top Manga',
+            to: '/manga/top'
+          }
+        ]
     },
-    {
-        link: 'Watch',
-        to: '/watch'
-    }
+    // {
+    //     link: 'Watch',
+    //     to: '/watch'
+    // }
 ]
 
 export const footerData = [

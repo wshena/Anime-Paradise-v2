@@ -2,8 +2,9 @@
 import { useState } from "react"
 import { NavbarNavigation } from "../utils/data"
 import {BiSearchAlt} from 'react-icons/bi'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ImCancelCircle } from "react-icons/im";
+import { IoMdMenu } from "react-icons/io";
 
 const MobileForm = ({handleFormSubmit, handleInputChange, input, click}) => {
 	return (
@@ -18,8 +19,65 @@ const MobileForm = ({handleFormSubmit, handleInputChange, input, click}) => {
 	)
 }
 
+const MobileNav = ({click}) => {
+	return (
+		<div className="z-50 absolute top-0 left-0 w-[100vw] h-[100vh] bg-gray-700 text-white p-[50px]">
+			<div className="flex flex-col gap-[20px]">
+				<div className="w-full flex justify-end">
+					<button onClick={click}> <ImCancelCircle color="white" size={24}/> </button>
+				</div>
+
+				<div className="flex flex-col border border-red-100">
+					{
+						NavbarNavigation.map((nav) => {
+							return (
+								<div className="w-full flex justify-end mb-[10px]" key={nav.link}>
+									<button>{nav.link}</button>
+								</div>
+							)
+						})
+					}
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const DropDownNav = ({link, array}) => {
+	const [isClick, setIsClick] = useState(false);
+	const handleClick = () => {
+		setIsClick(!isClick)
+	}
+	return (
+		<div className="relative">
+			<button className="hover:cursor-pointer" onClick={handleClick}>{link}</button>
+
+			{
+				isClick && (
+					<div className="absolute top-[40px] left-0 bg-white text-black z-50 flex flex-col w-[170px] shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+						{
+							array.map((nav) => {
+								return (
+									<div key={nav.link} className="hover:bg-black p-[20px] hover:text-white">
+										<Link to={nav.to}>{nav.link}</Link>
+									</div>
+								)
+							})
+						}
+					</div>
+				)
+			}
+		</div>
+	)
+}
+
 const Navbar = () => {
 	const [isClick, setIsClick] = useState(false);
+	const [mobileNavIsClick, setMobileNavIsClick] = useState(false);
+
+	const hendleMobileNavClick = () => {
+		setMobileNavIsClick(!mobileNavIsClick);
+	}
 	const handleClick = () => {
 		setIsClick(!isClick);
 	}
@@ -41,7 +99,7 @@ const Navbar = () => {
 					{
 						NavbarNavigation.map((nav) => {
 							return (
-								<a key={nav.link} href={nav.to}>{nav.link}</a>
+								<DropDownNav link={nav.link} array={nav.dropdown} key={nav.link}/>
 							)
 						})
 					}
@@ -53,10 +111,19 @@ const Navbar = () => {
 				<button type="submit" onClick={handleFormSubmit}> <BiSearchAlt size={25}/> </button>
 			</form>
 
-			<button className="block md:hidden" type="submit" onClick={handleClick}> <BiSearchAlt size={25}/> </button>
+			<div className="flex gap-[20px]">
+				<button className="block md:hidden" type="submit" onClick={hendleMobileNavClick}> <IoMdMenu  size={25}/> </button>
+
+				<button className="block md:hidden" type="submit" onClick={handleClick}> <BiSearchAlt size={25}/> </button>
+			</div>
 			{
 				isClick && (
 					<MobileForm handleInputChange={handleInputChange} handleFormSubmit={handleFormSubmit} input={input} click={handleClick}/>
+				)
+			}
+			{
+				mobileNavIsClick && (
+					<MobileNav click={hendleMobileNavClick} />
 				)
 			}
 		</nav>
