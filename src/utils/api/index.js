@@ -58,7 +58,7 @@ export const GetAnimeSearch = async (title, page) => {
 export const GetMangaSearch = async (title, page) => {
   try {
     const respone = await axios.get(`${import.meta.env.VITE_REACT_APP_BASE_URL}/manga?q=${title}&page=${page}`);
-    return respone.data.data
+    return respone.data
   } catch (error) {
     console.log(error)
   }

@@ -49,6 +49,8 @@ const Search = () => {
 		fetchData(title, currentPage)
 	}, [title, currentPage])
 
+	console.log(mangaSearch)
+
   return (
 		<Layout>
 			<div className="container container__padding">

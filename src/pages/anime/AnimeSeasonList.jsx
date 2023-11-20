@@ -120,7 +120,7 @@ const AnimeSeasonList = () => {
 			<div className="container container__padding">
 				<div className="flex flex-col gap-[20px] md:gap-0 md:flex-row items-center relative mb-[50px]">
 					<h1 className="text-[2rem]">Anime Season</h1>
-					<div className="absolute top-[60px] md:top-0 md:right-0 z-50">
+					<div className="absolute top-[60px] md:top-0 md:right-0 z-40">
 						<Dropdown data={seasonList} setActiveTab={setActiveTab}/>
 					</div>
 				</div>

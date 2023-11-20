@@ -5,6 +5,7 @@ import {BiSearchAlt} from 'react-icons/bi'
 import { Link, useNavigate } from "react-router-dom";
 import { ImCancelCircle } from "react-icons/im";
 import { IoMdMenu } from "react-icons/io";
+import { FaAngleDown } from "react-icons/fa";
 
 const MobileForm = ({handleFormSubmit, handleInputChange, input, click}) => {
 	return (
@@ -19,20 +20,49 @@ const MobileForm = ({handleFormSubmit, handleInputChange, input, click}) => {
 	)
 }
 
+const MobileDropdown = ({link, array}) => {
+	const [isClick, setIsClick] = useState(false);
+	const handleClick = () => {
+		setIsClick(!isClick)
+	}
+
+	return (
+		<div className="w-full">
+			<button className="hover:cursor-pointer flex items-center gap-[8px]" onClick={handleClick}>{link} <FaAngleDown /></button>
+
+			{
+				isClick && (
+					<div className="flex flex-col w-[100%]">
+						{
+							array.map((nav) => {
+								return (
+									<div className="p-[15px] w-full" key={nav.link}>
+										<Link to={nav.to}>{nav.link}</Link>
+									</div>	
+								)
+							})
+						}
+					</div>
+				)
+			}
+		</div>
+	)
+}
+
 const MobileNav = ({click}) => {
 	return (
-		<div className="z-50 absolute top-0 left-0 w-[100vw] h-[100vh] bg-gray-700 text-white p-[50px]">
+		<div className="block md:hidden z-50 absolute top-0 left-0 w-[100vw] h-[100vh] bg-gray-700 text-white p-[50px]">
 			<div className="flex flex-col gap-[20px]">
 				<div className="w-full flex justify-end">
 					<button onClick={click}> <ImCancelCircle color="white" size={24}/> </button>
 				</div>
 
-				<div className="flex flex-col border border-red-100">
+				<div className="flex flex-col">
 					{
 						NavbarNavigation.map((nav) => {
 							return (
 								<div className="w-full flex justify-end mb-[10px]" key={nav.link}>
-									<button>{nav.link}</button>
+									<MobileDropdown link={nav.link} array={nav.dropdown}/>
 								</div>
 							)
 						})
@@ -111,7 +141,7 @@ const Navbar = () => {
 				<button type="submit" onClick={handleFormSubmit}> <BiSearchAlt size={25}/> </button>
 			</form>
 
-			<div className="flex gap-[20px]">
+			<div className="flex md:hidden gap-[20px]">
 				<button className="block md:hidden" type="submit" onClick={hendleMobileNavClick}> <IoMdMenu  size={25}/> </button>
 
 				<button className="block md:hidden" type="submit" onClick={handleClick}> <BiSearchAlt size={25}/> </button>
